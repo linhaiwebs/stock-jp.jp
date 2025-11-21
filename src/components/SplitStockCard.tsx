@@ -12,9 +12,19 @@ export default function SplitStockCard({ info, latestPrice }: SplitStockCardProp
 
   return (
     <div className="px-4 py-0">
-      <div className="max-w-lg mx-auto space-y-6">
-        <StockTrendSection info={info} date={date} />
-        <StockDataGrid info={info} latestPrice={latestPrice} />
+      <div className="max-w-lg mx-auto">
+        <div className="text-center mb-0">
+          <div className="text-3xl font-black" style={{
+            color: '#3c0800',
+            fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif'
+          }}>
+            {info.name}
+          </div>
+        </div>
+        <div className="space-y-6">
+          <StockTrendSection info={info} date={date} />
+          <StockDataGrid info={info} latestPrice={latestPrice} />
+        </div>
       </div>
     </div>
   );

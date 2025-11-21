@@ -18,17 +18,8 @@ export default function StockTrendSection({ info, date }: StockTrendSectionProps
         repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(200, 180, 160, 0.15) 19px, rgba(200, 180, 160, 0.15) 20px)
       `,
       minHeight: '240px',
-      padding: '0'
+      padding: '20px'
     }}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-20">
-        <div className="text-3xl font-black" style={{
-          color: '#3c0800',
-          textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)',
-          fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif'
-        }}>
-          {info.name}
-        </div>
-      </div>
 
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 320 240" preserveAspectRatio="none">
         <defs>
@@ -97,11 +88,11 @@ export default function StockTrendSection({ info, date }: StockTrendSectionProps
           </div>
         </div>
 
-        <div className="absolute bottom-6 right-6 text-right">
-          <div className="text-4xl font-black" style={{ color: '#3c0800', textShadow: '1px 1px 2px rgba(255, 255, 255, 0.5)' }}>
+        <div className="absolute bottom-2 right-3 text-right">
+          <div className="text-2xl font-black" style={{ color: '#3c0800', textShadow: '1px 1px 2px rgba(255, 255, 255, 0.5)', fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif' }}>
             ({info.code})
           </div>
-          <div className="text-3xl font-bold" style={{ color: '#3c0800', marginTop: '4px', textShadow: '1px 1px 2px rgba(255, 255, 255, 0.5)' }}>
+          <div className="text-xl font-bold" style={{ color: '#3c0800', marginTop: '2px', textShadow: '1px 1px 2px rgba(255, 255, 255, 0.5)', fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif' }}>
             {date}
           </div>
         </div>
