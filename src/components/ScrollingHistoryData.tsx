@@ -7,16 +7,18 @@ interface ScrollingHistoryDataProps {
 }
 
 export default function ScrollingHistoryData({ prices, stockName }: ScrollingHistoryDataProps) {
-  const [startIndex, setStartIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    if (prices.length <= 3) return;
+    if (prices.length <= 1) return;
 
     const interval = setInterval(() => {
-      setStartIndex((prev) => {
-        const next = prev + 1;
-        return next >= prices.length - 2 ? 0 : next;
-      });
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % prices.length);
+        setIsAnimating(false);
+      }, 800);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -26,9 +28,8 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
     return null;
   }
 
-  const displayPrices = prices.length <= 3
-    ? prices
-    : [prices[startIndex], prices[startIndex + 1], prices[startIndex + 2]];
+  const currentPrice = prices[currentIndex];
+  const nextPrice = prices[(currentIndex + 1) % prices.length];
 
   const formatChange = (change: string, changePercent: string) => {
     const changeNum = parseFloat(change);
@@ -43,40 +44,28 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
     return `${month}/${day}`;
   };
 
-  const renderTopEntry = (price: StockPrice, index: number) => {
+  const renderEntry = (price: StockPrice, position: 'current' | 'next') => {
     const changeNum = parseFloat(price.change);
     const changeColor = changeNum >= 0 ? '#c6e48b' : '#ff6b6b';
 
-    return (
-      <div
-        key={`${price.date}-${index}`}
-        className="absolute top-[8%] left-1/2 -translate-x-1/2 text-center"
-        style={{ width: '70%' }}
-      >
-        <div className="text-white font-bold text-lg mb-1" style={{ transform: 'rotate(-8deg)' }}>
-          株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
-        </div>
-        <div className="text-sm" style={{ color: changeColor, transform: 'rotate(-6deg)' }}>
-          <span className="font-medium text-white">終値：</span>
-          <span className="font-bold">{price.close}</span>
-        </div>
-        <div className="text-sm mt-0.5" style={{ color: changeColor, transform: 'rotate(-4deg)' }}>
-          <span className="font-medium text-white">前日比：</span>
-          <span className="font-bold">{formatChange(price.change, price.changePercent)}</span>
-        </div>
-      </div>
-    );
-  };
+    const baseStyle = {
+      width: '70%',
+      transition: 'transform 0.8s ease-in-out, opacity 0.8s ease-in-out'
+    };
 
-  const renderMiddleEntry = (price: StockPrice, index: number) => {
-    const changeNum = parseFloat(price.change);
-    const changeColor = changeNum >= 0 ? '#c6e48b' : '#ff6b6b';
+    const positionStyle = position === 'current'
+      ? (isAnimating
+          ? { transform: 'translate(-50%, -150%)', opacity: 0 }
+          : { transform: 'translate(-50%, -50%)', opacity: 1 })
+      : (isAnimating
+          ? { transform: 'translate(-50%, -50%)', opacity: 1 }
+          : { transform: 'translate(-50%, 50%)', opacity: 0 });
 
     return (
       <div
-        key={`${price.date}-${index}`}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
-        style={{ width: '70%' }}
+        key={`${price.date}-${position}`}
+        className="absolute top-1/2 left-1/2 text-center"
+        style={{ ...baseStyle, ...positionStyle }}
       >
         <div className="text-white font-bold text-lg mb-1">
           株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
@@ -93,35 +82,10 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
     );
   };
 
-  const renderBottomEntry = (price: StockPrice, index: number) => {
-    const changeNum = parseFloat(price.change);
-    const changeColor = changeNum >= 0 ? '#c6e48b' : '#ff6b6b';
-
-    return (
-      <div
-        key={`${price.date}-${index}`}
-        className="absolute bottom-[8%] left-1/2 -translate-x-1/2 text-center"
-        style={{ width: '70%' }}
-      >
-        <div className="text-white font-bold text-lg mb-1" style={{ transform: 'rotate(8deg)' }}>
-          株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
-        </div>
-        <div className="text-sm" style={{ color: changeColor, transform: 'rotate(6deg)' }}>
-          <span className="font-medium text-white">終値：</span>
-          <span className="font-bold">{price.close}</span>
-        </div>
-        <div className="text-sm mt-0.5" style={{ color: changeColor, transform: 'rotate(4deg)' }}>
-          <span className="font-medium text-white">前日比：</span>
-          <span className="font-bold">{formatChange(price.change, price.changePercent)}</span>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="px-4 py-6">
       <div className="max-w-lg mx-auto">
-        <div className="relative w-full" style={{ paddingBottom: '100%' }}>
+        <div className="relative w-full overflow-hidden" style={{ paddingBottom: '100%' }}>
           <div className="absolute inset-0">
             <img
               src="/stock.png"
@@ -167,9 +131,8 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
               </svg>
             </div>
 
-            {displayPrices.length >= 1 && renderTopEntry(displayPrices[0], 0)}
-            {displayPrices.length >= 2 && renderMiddleEntry(displayPrices[1], 1)}
-            {displayPrices.length >= 3 && renderBottomEntry(displayPrices[2], 2)}
+            {renderEntry(currentPrice, 'current')}
+            {prices.length > 1 && renderEntry(nextPrice, 'next')}
           </div>
         </div>
 
