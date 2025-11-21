@@ -20,7 +20,7 @@ export default function StockTrendSection({ info, date }: StockTrendSectionProps
       minHeight: '240px',
       padding: '20px'
     }}>
-      <div className="absolute top-4 left-4 text-red-600 font-bold text-lg">
+      <div className="absolute top-8 left-4 text-red-600 font-bold text-lg">
         ソフトバンクグループ
       </div>
 
