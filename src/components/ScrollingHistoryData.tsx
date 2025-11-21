@@ -33,44 +33,144 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
   const formatChange = (change: string, changePercent: string) => {
     const changeNum = parseFloat(change);
     const sign = changeNum >= 0 ? '+' : '';
-    return `${sign}${change} (${sign}${changePercent}%)`;
+    return `${sign}${change} (${changePercent}%)`;
   };
 
-  const renderCard = (price: StockPrice) => {
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${month}/${day}`;
+  };
+
+  const renderTopEntry = (price: StockPrice, index: number) => {
     const changeNum = parseFloat(price.change);
-    const isPositive = changeNum >= 0;
-    const changeColor = isPositive ? 'text-red-600' : 'text-green-600';
-    const borderColor = isPositive ? 'border-red-200' : 'border-green-200';
+    const changeColor = changeNum >= 0 ? '#c6e48b' : '#ff6b6b';
 
     return (
       <div
-        className={`rounded-2xl border-2 ${borderColor} p-4 shadow-sm`}
-        style={{ backgroundColor: '#fef9f5' }}
+        key={`${price.date}-${index}`}
+        className="absolute top-[8%] left-1/2 -translate-x-1/2 text-center"
+        style={{ width: '70%' }}
       >
-        <div className="flex justify-center mb-3">
-          <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-1.5 rounded-full text-sm font-bold shadow-md">
-            株-{price.code || stockName} {price.date}
-          </div>
+        <div className="text-white font-bold text-lg mb-1" style={{ transform: 'rotate(-8deg)' }}>
+          株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
         </div>
+        <div className="text-sm" style={{ color: changeColor, transform: 'rotate(-6deg)' }}>
+          <span className="font-medium text-white">終値：</span>
+          <span className="font-bold">{price.close}</span>
+        </div>
+        <div className="text-sm mt-0.5" style={{ color: changeColor, transform: 'rotate(-4deg)' }}>
+          <span className="font-medium text-white">前日比：</span>
+          <span className="font-bold">{formatChange(price.change, price.changePercent)}</span>
+        </div>
+      </div>
+    );
+  };
 
-        <div className={`rounded-xl border-2 ${borderColor} p-3 text-center`}>
-          <div className="text-sm text-gray-600">
-            前日比：<span className={`font-bold ${changeColor}`}>{formatChange(price.change, price.changePercent)}</span>
-          </div>
+  const renderMiddleEntry = (price: StockPrice, index: number) => {
+    const changeNum = parseFloat(price.change);
+    const changeColor = changeNum >= 0 ? '#c6e48b' : '#ff6b6b';
+
+    return (
+      <div
+        key={`${price.date}-${index}`}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
+        style={{ width: '70%' }}
+      >
+        <div className="text-white font-bold text-lg mb-1">
+          株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
+        </div>
+        <div className="text-sm" style={{ color: changeColor }}>
+          <span className="font-medium text-white">終値：</span>
+          <span className="font-bold">{price.close}</span>
+        </div>
+        <div className="text-sm mt-0.5" style={{ color: changeColor }}>
+          <span className="font-medium text-white">前日比：</span>
+          <span className="font-bold">{formatChange(price.change, price.changePercent)}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const renderBottomEntry = (price: StockPrice, index: number) => {
+    const changeNum = parseFloat(price.change);
+    const changeColor = changeNum >= 0 ? '#c6e48b' : '#ff6b6b';
+
+    return (
+      <div
+        key={`${price.date}-${index}`}
+        className="absolute bottom-[8%] left-1/2 -translate-x-1/2 text-center"
+        style={{ width: '70%' }}
+      >
+        <div className="text-white font-bold text-lg mb-1" style={{ transform: 'rotate(8deg)' }}>
+          株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
+        </div>
+        <div className="text-sm" style={{ color: changeColor, transform: 'rotate(6deg)' }}>
+          <span className="font-medium text-white">終値：</span>
+          <span className="font-bold">{price.close}</span>
+        </div>
+        <div className="text-sm mt-0.5" style={{ color: changeColor, transform: 'rotate(4deg)' }}>
+          <span className="font-medium text-white">前日比：</span>
+          <span className="font-bold">{formatChange(price.change, price.changePercent)}</span>
         </div>
       </div>
     );
   };
 
   return (
-    <div className="px-4 py-2">
+    <div className="px-4 py-6">
       <div className="max-w-lg mx-auto">
-        <div className="space-y-3">
-          {displayPrices.map((price, index) => (
-            <div key={`${price.date}-${index}`}>
-              {renderCard(price)}
+        <div className="relative w-full" style={{ paddingBottom: '100%' }}>
+          <div className="absolute inset-0">
+            <img
+              src="/stock.png"
+              alt="Stock background"
+              className="w-full h-full object-contain"
+            />
+
+            <div className="absolute top-[3%] left-[3%] w-[15%] h-[15%]">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <circle cx="50" cy="50" r="45" fill="#8B4513" opacity="0.8"/>
+                <circle cx="50" cy="50" r="35" fill="#D2691E" opacity="0.6"/>
+                <circle cx="50" cy="50" r="25" fill="#FFD700" opacity="0.4"/>
+                {[...Array(12)].map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 30 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 30 * Math.PI) / 180)}
+                    stroke="#FFD700"
+                    strokeWidth="1"
+                  />
+                ))}
+              </svg>
             </div>
-          ))}
+
+            <div className="absolute bottom-[3%] right-[3%] w-[15%] h-[15%]">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <circle cx="50" cy="50" r="45" fill="#8B4513" opacity="0.8"/>
+                <circle cx="50" cy="50" r="35" fill="#D2691E" opacity="0.6"/>
+                <circle cx="50" cy="50" r="25" fill="#FFD700" opacity="0.4"/>
+                {[...Array(12)].map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 30 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 30 * Math.PI) / 180)}
+                    stroke="#FFD700"
+                    strokeWidth="1"
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {displayPrices.length >= 1 && renderTopEntry(displayPrices[0], 0)}
+            {displayPrices.length >= 2 && renderMiddleEntry(displayPrices[1], 1)}
+            {displayPrices.length >= 3 && renderBottomEntry(displayPrices[2], 2)}
+          </div>
         </div>
 
         <div className="mt-3 text-center">
