@@ -12,7 +12,7 @@ export default function HeroSection({ stockCode = '----', stockName = '', onDiag
     <div className="relative w-full">
       <div className="w-full px-4 py-0 flex flex-col items-center">
         <div className="w-full max-w-4xl mx-auto mb-2">
-          <div className="text-center mb-1" style={{ marginTop: '5px' }}>
+          <div className="text-center mb-1" style={{ marginTop: '40px' }}>
             <h1 className="inline-block" style={{ height: '1.5rem' }}>
             </h1>
           </div>
