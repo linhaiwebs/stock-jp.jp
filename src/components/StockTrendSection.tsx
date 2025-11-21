@@ -11,12 +11,9 @@ export default function StockTrendSection({ info, date }: StockTrendSectionProps
 
   return (
     <div className="relative w-full overflow-hidden rounded-lg" style={{
-      background: 'linear-gradient(to bottom, #f5e6d3 0%, #fdf5eb 100%)',
-      backgroundImage: `
-        linear-gradient(to bottom, #f5e6d3 0%, #fdf5eb 100%),
-        repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(200, 180, 160, 0.15) 19px, rgba(200, 180, 160, 0.15) 20px),
-        repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(200, 180, 160, 0.15) 19px, rgba(200, 180, 160, 0.15) 20px)
-      `,
+      backgroundImage: 'url(/redis.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
       minHeight: '240px',
       padding: '20px'
     }}>
