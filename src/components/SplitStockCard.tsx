@@ -22,7 +22,7 @@ export default function SplitStockCard({ info, latestPrice }: SplitStockCardProp
   };
 
   return (
-    <div className="px-4 py-2">
+    <div className="px-4 py-0">
       <div className="max-w-lg mx-auto">
         <div className="px-2 py-0">
             <div className="flex gap-3">

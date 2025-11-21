@@ -353,6 +353,26 @@ export default function NewHome() {
 
         {stockData && diagnosisState === 'initial' && (
           <>
+            <div className="px-4 py-2">
+              <div className="max-w-lg mx-auto flex justify-center">
+                <button
+                  onClick={runDiagnosis}
+                  disabled={!hasRealData}
+                  className="relative transition-all duration-300 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    width: '280px',
+                    filter: !hasRealData ? 'grayscale(50%)' : 'none'
+                  }}
+                >
+                  <img
+                    src="/button.png"
+                    alt="診断開始"
+                    className="w-full h-auto"
+                  />
+                </button>
+              </div>
+            </div>
+
             <SplitStockCard
               info={stockData.info}
               latestPrice={stockData.prices[0]}
