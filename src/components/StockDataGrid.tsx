@@ -7,11 +7,10 @@ interface StockDataGridProps {
 
 export default function StockDataGrid({ info, latestPrice }: StockDataGridProps) {
   const dataItems = [
-    { label: '初期値', value: latestPrice?.open || info.price, color: '#16a34a' },
+    { label: '始値', value: latestPrice?.open || info.price, color: '#16a34a' },
     { label: '高値', value: latestPrice?.high || info.price, color: '#16a34a' },
-    { label: '一昨日の終わり', value: info.change, color: '#16a34a' },
-    { label: '値', value: latestPrice?.close || info.price, color: '#16a34a' },
-    { label: '最終値を調整する', value: latestPrice?.close || info.price, color: '#16a34a' },
+    { label: '安値', value: latestPrice?.low || info.price, color: '#16a34a' },
+    { label: '終値', value: latestPrice?.close || info.price, color: '#16a34a' },
     { label: '売買高', value: latestPrice?.volume || 'N/A', color: '#16a34a' },
   ];
 
