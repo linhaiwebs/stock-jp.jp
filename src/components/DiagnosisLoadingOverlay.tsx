@@ -57,7 +57,7 @@ export default function DiagnosisLoadingOverlay({
       }`}
       style={{
         touchAction: 'none',
-        background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.95) 0%, rgba(219, 39, 119, 0.95) 50%, rgba(244, 114, 182, 0.95) 100%)'
+        background: 'linear-gradient(135deg, rgba(60, 8, 0, 0.95) 0%, rgba(92, 42, 20, 0.95) 50%, rgba(139, 69, 19, 0.95) 100%)'
       }}
     >
       <div className={`w-full max-w-lg transition-transform duration-500 ${
@@ -67,7 +67,7 @@ export default function DiagnosisLoadingOverlay({
           <div
             className="absolute inset-0 opacity-10"
             style={{
-              background: 'linear-gradient(135deg, rgba(236,72,153,0.3) 0%, rgba(219,39,119,0.2) 50%, rgba(244,114,182,0.3) 100%)'
+              background: 'linear-gradient(135deg, rgba(60,8,0,0.3) 0%, rgba(92,42,20,0.2) 50%, rgba(139,69,19,0.3) 100%)'
             }}
           />
 
@@ -75,15 +75,16 @@ export default function DiagnosisLoadingOverlay({
             <RobotScholarIcon />
 
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600 mb-2 text-center">市場データ分析中</h3>
-              <p className="text-sm font-semibold text-pink-700 text-center">参考情報を生成しています...</p>
+              <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r mb-2 text-center" style={{ backgroundImage: 'linear-gradient(to right, #3c0800, #8B4513)' }}>市場データ分析中</h3>
+              <p className="text-sm font-semibold text-center" style={{ color: '#5a2a14' }}>参考情報を生成しています...</p>
             </div>
 
-            <div className="relative w-full h-4 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full overflow-hidden mb-3 border-2 border-pink-300 shadow-inner">
+            <div className="relative w-full h-4 rounded-full overflow-hidden mb-3 border-2 shadow-inner" style={{ background: 'linear-gradient(to right, #f5e6d3, #e8d4bf)', borderColor: '#8B4513' }}>
               <div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-pink-500 via-rose-500 to-pink-400 transition-all duration-300 ease-out animate-gradient-shift shadow-lg"
+                className="absolute top-0 left-0 h-full transition-all duration-300 ease-out animate-gradient-shift shadow-lg"
                 style={{
                   width: `${Math.min(progress, 100)}%`,
+                  background: 'linear-gradient(to right, #3c0800, #8B4513, #5a2a14)',
                   backgroundSize: '200% 100%'
                 }}
               />
@@ -93,17 +94,17 @@ export default function DiagnosisLoadingOverlay({
             </div>
 
             <div className="mb-6 text-center">
-              <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600">
+              <span className="text-2xl font-bold text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(to right, #3c0800, #8B4513)' }}>
                 {Math.floor(Math.min(progress, 100))}%
               </span>
             </div>
 
-            <div className="bg-gradient-to-br from-pink-50 to-rose-50 border-3 border-pink-200 rounded-xl p-6 shadow-lg">
+            <div className="border-3 rounded-xl p-6 shadow-lg" style={{ background: 'linear-gradient(to bottom right, #f5e6d3, #e8d4bf)', borderColor: '#8B4513' }}>
               <div className="space-y-3 text-sm">
-                <p className="text-pink-900 font-bold text-center text-base">
+                <p className="font-bold text-center text-base" style={{ color: '#3c0800' }}>
                   AIによる情報分析中（参考資料作成）
                 </p>
-                <p className="text-pink-700 font-semibold text-center">
+                <p className="font-semibold text-center" style={{ color: '#5a2a14' }}>
                   しばらくお待ちください
                 </p>
               </div>

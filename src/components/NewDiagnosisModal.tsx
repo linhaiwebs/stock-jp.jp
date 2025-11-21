@@ -19,7 +19,7 @@ const formatAnalysisText = (text: string) => {
   const lines = text.split('\n');
   return lines.map((line, index) => {
     const formattedLine = line.replace(/(\d+\.?\d*%?|\d+円|[+-]\d+\.?\d*)/g, (match) => {
-      return `<span class="text-pink-600 font-semibold text-lg">${match}</span>`;
+      return `<span style="color: #8B4513;" class="font-semibold text-lg">${match}</span>`;
     });
 
     const isBold = line.includes('###') || line.includes('**') || line.match(/^[\d]+\./);
@@ -71,7 +71,7 @@ export default function NewDiagnosisModal({
     <div
       className="fixed inset-0 z-[9998] flex items-center justify-center p-2 sm:p-4 backdrop-blur-md"
       style={{
-        background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.90) 0%, rgba(219, 39, 119, 0.90) 50%, rgba(244, 114, 182, 0.90) 100%)'
+        background: 'linear-gradient(135deg, rgba(60, 8, 0, 0.90) 0%, rgba(92, 42, 20, 0.90) 50%, rgba(139, 69, 19, 0.90) 100%)'
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
@@ -85,7 +85,7 @@ export default function NewDiagnosisModal({
         </div>
 
         <div className="relative bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden border-4 border-white pt-0 sm:pt-16">
-          <div className="relative sticky top-0 bg-gradient-to-r from-pink-500 to-rose-500 px-3 py-2 sm:px-5 sm:py-3 flex items-center justify-between border-b-4 border-pink-700 backdrop-blur-sm z-10 shadow-lg">
+          <div className="relative sticky top-0 px-3 py-2 sm:px-5 sm:py-3 flex items-center justify-between border-b-4 backdrop-blur-sm z-10 shadow-lg" style={{ background: 'linear-gradient(to right, #3c0800, #8B4513)', borderColor: '#2a0600' }}>
           <div className="flex-1 text-center pr-8">
             <h2 className="text-base sm:text-lg md:text-xl font-bold text-white drop-shadow-lg">
               {stockName}（{stockCode}）AI市場分析レポート（参考資料）
@@ -100,24 +100,24 @@ export default function NewDiagnosisModal({
           </button>
         </div>
 
-        <div className="relative overflow-y-auto max-h-[calc(95vh-180px)] sm:max-h-[calc(95vh-200px)] px-3 py-3 sm:px-5 sm:py-4 space-y-3 sm:space-y-4 bg-gradient-to-br from-pink-50 to-rose-50">
+        <div className="relative overflow-y-auto max-h-[calc(95vh-180px)] sm:max-h-[calc(95vh-200px)] px-3 py-3 sm:px-5 sm:py-4 space-y-3 sm:space-y-4" style={{ background: 'linear-gradient(to bottom right, #f5e6d3, #e8d4bf)' }}>
 
-          <div className="relative bg-white/80 backdrop-blur-xl rounded-lg sm:rounded-xl p-4 sm:p-5 border-2 border-pink-200 overflow-hidden shadow-xl">
-            <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 bg-gradient-to-br from-pink-200/30 to-rose-200/30 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-36 sm:h-36 bg-gradient-to-tr from-pink-200/30 to-rose-200/30 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="relative bg-white/80 backdrop-blur-xl rounded-lg sm:rounded-xl p-4 sm:p-5 border-2 overflow-hidden shadow-xl" style={{ borderColor: '#d4a574' }}>
+            <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'linear-gradient(to bottom right, rgba(139, 69, 19, 0.15), rgba(210, 105, 30, 0.15))' }}></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-36 sm:h-36 rounded-full blur-3xl pointer-events-none" style={{ background: 'linear-gradient(to top right, rgba(139, 69, 19, 0.15), rgba(210, 105, 30, 0.15))' }}></div>
 
             <div className="relative space-y-2 sm:space-y-3">
-              <div className="bg-white rounded-lg p-3 sm:p-4 border-2 border-pink-200 backdrop-blur-sm shadow-lg">
+              <div className="bg-white rounded-lg p-3 sm:p-4 border-2 backdrop-blur-sm shadow-lg" style={{ borderColor: '#d4a574' }}>
                 <div className="text-xs sm:text-sm text-gray-700 leading-relaxed space-y-2">
                   {isConnecting ? (
                     <div className="text-center py-4">
-                      <p className="text-pink-600 font-bold">市場データ分析中...</p>
+                      <p className="font-bold" style={{ color: '#8B4513' }}>市場データ分析中...</p>
                     </div>
                   ) : (
                     <>
                       <div dangerouslySetInnerHTML={{ __html: formatAnalysisText(analysis) }} />
                       {isStreaming && (
-                        <span className="inline-block w-2 h-4 bg-gradient-to-r from-pink-500 to-rose-500 animate-pulse ml-1"></span>
+                        <span className="inline-block w-2 h-4 animate-pulse ml-1" style={{ background: 'linear-gradient(to right, #3c0800, #8B4513)' }}></span>
                       )}
                     </>
                   )}
