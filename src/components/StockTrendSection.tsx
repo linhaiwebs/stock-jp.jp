@@ -37,28 +37,30 @@ export default function StockTrendSection({ info, date }: StockTrendSectionProps
         </defs>
 
         <g className="trend-bars">
-          <rect x="20" y="140" width="8" height="80" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0s' }} />
-          <rect x="35" y="120" width="8" height="100" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.1s' }} />
-          <rect x="50" y="135" width="8" height="85" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.2s' }} />
-          <rect x="65" y="115" width="8" height="105" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.3s' }} />
-          <rect x="80" y="100" width="8" height="120" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.4s' }} />
-          <rect x="95" y="105" width="8" height="115" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.5s' }} />
-          <rect x="110" y="90" width="8" height="130" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.6s' }} />
-          <rect x="125" y="95" width="8" height="125" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.7s' }} />
-          <rect x="140" y="80" width="8" height="140" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.8s' }} />
-          <rect x="155" y="85" width="8" height="135" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.9s' }} />
-          <rect x="170" y="70" width="8" height="150" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1s' }} />
-          <rect x="185" y="75" width="8" height="145" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.1s' }} />
-          <rect x="200" y="60" width="8" height="160" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.2s' }} />
-          <rect x="215" y="65" width="8" height="155" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.3s' }} />
-          <rect x="230" y="50" width="8" height="170" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.4s' }} />
-          <rect x="245" y="55" width="8" height="165" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.5s' }} />
-          <rect x="260" y="45" width="8" height="175" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.6s' }} />
-          <rect x="275" y="40" width="8" height="180" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.7s' }} />
+          <rect x="20" y="120" width="8" height="120" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0s' }} />
+          <rect x="35" y="100" width="8" height="140" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.1s' }} />
+          <rect x="50" y="115" width="8" height="125" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.2s' }} />
+          <rect x="65" y="95" width="8" height="145" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.3s' }} />
+          <rect x="80" y="80" width="8" height="160" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.4s' }} />
+          <rect x="95" y="85" width="8" height="155" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.5s' }} />
+          <rect x="110" y="70" width="8" height="170" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.6s' }} />
+          <rect x="125" y="75" width="8" height="165" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.7s' }} />
+          <rect x="140" y="60" width="8" height="180" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.8s' }} />
+          <rect x="155" y="65" width="8" height="175" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '0.9s' }} />
+          <rect x="170" y="50" width="8" height="190" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1s' }} />
+          <rect x="185" y="55" width="8" height="185" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.1s' }} />
+          <rect x="200" y="40" width="8" height="200" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.2s' }} />
+          <rect x="215" y="45" width="8" height="195" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.3s' }} />
+          <rect x="230" y="30" width="8" height="210" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.4s' }} />
+          <rect x="245" y="35" width="8" height="205" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.5s' }} />
+          <rect x="260" y="25" width="8" height="215" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.6s' }} />
+          <rect x="275" y="20" width="8" height="220" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.7s' }} />
+          <rect x="290" y="15" width="8" height="225" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.8s' }} />
+          <rect x="305" y="18" width="8" height="222" fill="url(#barGradient)" className="animate-bar" style={{ animationDelay: '1.9s' }} />
         </g>
 
         <polyline
-          points="24,145 39,125 54,140 69,120 84,105 99,110 114,95 129,100 144,85 159,90 174,75 189,80 204,65 219,70 234,55 249,60 264,50 279,45"
+          points="24,125 39,105 54,120 69,100 84,85 99,90 114,75 129,80 144,65 159,70 174,55 189,60 204,45 219,50 234,35 249,40 264,30 279,25 294,20 309,23"
           fill="none"
           stroke="#b91c1c"
           strokeWidth="2.5"
@@ -68,7 +70,7 @@ export default function StockTrendSection({ info, date }: StockTrendSectionProps
         />
 
         <polygon
-          points="24,145 39,125 54,140 69,120 84,105 99,110 114,95 129,100 144,85 159,90 174,75 189,80 204,65 219,70 234,55 249,60 264,50 279,45 279,220 24,220"
+          points="24,125 39,105 54,120 69,100 84,85 99,90 114,75 129,80 144,65 159,70 174,55 189,60 204,45 219,50 234,35 249,40 264,30 279,25 294,20 309,23 309,240 24,240"
           fill="url(#trendGradient)"
           className="animate-area"
         />
@@ -89,11 +91,11 @@ export default function StockTrendSection({ info, date }: StockTrendSectionProps
           </div>
         </div>
 
-        <div className="text-right" style={{ marginTop: 'auto', paddingBottom: '20px' }}>
-          <div className="text-4xl font-black" style={{ color: '#2d3748' }}>
+        <div className="absolute bottom-6 right-6 text-right">
+          <div className="text-4xl font-black" style={{ color: '#3c0800', textShadow: '1px 1px 2px rgba(255, 255, 255, 0.5)' }}>
             ({info.code})
           </div>
-          <div className="text-sm font-medium" style={{ color: '#4a5568', marginTop: '4px' }}>
+          <div className="text-3xl font-bold" style={{ color: '#3c0800', marginTop: '4px', textShadow: '1px 1px 2px rgba(255, 255, 255, 0.5)' }}>
             {date}
           </div>
         </div>
