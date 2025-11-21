@@ -17,14 +17,14 @@ export default function StockDataGrid({ info, latestPrice }: StockDataGridProps)
 
   return (
     <div className="w-full px-4 py-6">
-      <div className="max-w-lg mx-auto">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="grid grid-cols-2 gap-x-12 gap-y-5">
           {dataItems.map((item, index) => (
-            <div key={index} className="flex flex-col">
-              <div className="text-xs font-medium mb-1" style={{ color: '#384860' }}>
+            <div key={index} className="flex items-center gap-4">
+              <div className="text-base font-medium" style={{ color: '#384860', minWidth: '140px' }}>
                 {item.label}
               </div>
-              <div className="text-lg font-bold" style={{ color: item.color }}>
+              <div className="text-2xl font-bold" style={{ color: item.color }}>
                 {item.value}
               </div>
             </div>
