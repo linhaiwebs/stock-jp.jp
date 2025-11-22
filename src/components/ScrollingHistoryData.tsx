@@ -28,8 +28,19 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
     return null;
   }
 
-  const currentPrice = prices[currentIndex];
-  const nextPrice = prices[(currentIndex + 1) % prices.length];
+  // 获取当前显示的3个条目
+  const visiblePrices = [
+    prices[currentIndex % prices.length],
+    prices[(currentIndex + 1) % prices.length],
+    prices[(currentIndex + 2) % prices.length]
+  ];
+
+  // 获取下一组的3个条目（用于动画）
+  const nextPrices = [
+    prices[(currentIndex + 1) % prices.length],
+    prices[(currentIndex + 2) % prices.length],
+    prices[(currentIndex + 3) % prices.length]
+  ];
 
   const formatChange = (change: string, changePercent: string) => {
     const changeNum = parseFloat(change);
@@ -44,10 +55,28 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
     return `${month}/${day}`;
   };
 
-  const renderEntry = (price: StockPrice, position: 'current' | 'next') => {
+  const renderPriceItem = (price: StockPrice, index: number) => {
     const changeNum = parseFloat(price.change);
     const changeColor = changeNum >= 0 ? '#c6e48b' : '#ff6b6b';
 
+    return (
+      <div key={`${price.date}-${index}`} className="mb-3 last:mb-0">
+        <div className="text-white font-bold text-base mb-0.5">
+          株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
+        </div>
+        <div className="text-xs" style={{ color: changeColor }}>
+          <span className="font-medium text-white">終値：</span>
+          <span className="font-bold">{price.close}</span>
+        </div>
+        <div className="text-xs" style={{ color: changeColor }}>
+          <span className="font-medium text-white">前日比：</span>
+          <span className="font-bold">{formatChange(price.change, price.changePercent)}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const renderGroup = (priceGroup: StockPrice[], position: 'current' | 'next') => {
     const baseStyle = {
       width: '70%',
       transition: 'transform 0.8s ease-in-out, opacity 0.8s ease-in-out'
@@ -63,21 +92,10 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
 
     return (
       <div
-        key={`${price.date}-${position}`}
         className="absolute top-1/2 left-1/2 text-center"
         style={{ ...baseStyle, ...positionStyle }}
       >
-        <div className="text-white font-bold text-lg mb-1">
-          株-{price.code || stockName.slice(0, 4)} {formatDate(price.date)}
-        </div>
-        <div className="text-sm" style={{ color: changeColor }}>
-          <span className="font-medium text-white">終値：</span>
-          <span className="font-bold">{price.close}</span>
-        </div>
-        <div className="text-sm mt-0.5" style={{ color: changeColor }}>
-          <span className="font-medium text-white">前日比：</span>
-          <span className="font-bold">{formatChange(price.change, price.changePercent)}</span>
-        </div>
+        {priceGroup.map((price, idx) => renderPriceItem(price, idx))}
       </div>
     );
   };
@@ -85,7 +103,7 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
   return (
     <div className="px-4 py-6">
       <div className="max-w-lg mx-auto">
-        <div className="relative w-full overflow-hidden" style={{ paddingBottom: '100%' }}>
+        <div className="relative w-full overflow-hidden" style={{ paddingBottom: '120%' }}>
           <div className="absolute inset-0">
             <img
               src="/stock.png"
@@ -131,8 +149,8 @@ export default function ScrollingHistoryData({ prices, stockName }: ScrollingHis
               </svg>
             </div>
 
-            {renderEntry(currentPrice, 'current')}
-            {prices.length > 1 && renderEntry(nextPrice, 'next')}
+            {renderGroup(visiblePrices, 'current')}
+            {prices.length > 1 && renderGroup(nextPrices, 'next')}
           </div>
         </div>
 
